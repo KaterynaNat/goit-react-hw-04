@@ -4,7 +4,7 @@ import styles from './Loader.module.css';
 function Loader() {
   return (
     <div className={styles.loader}>
-      <Circles color="#00BFFF" height={80} width={80} />
+      <Circles color="#646cff" height={80} width={80} />
     </div>
   );
 }

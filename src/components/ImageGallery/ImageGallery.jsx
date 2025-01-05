@@ -5,9 +5,9 @@ import styles from './ImageGallery.module.css';
 function ImageGallery({ images, onImageClick }) {
   return (
     <ul className={styles.gallery}>
-      {images.map(image => (
+      {images.map((image) => (
         <li key={image.id} className={styles.item}>
-          <ImageCard image={image} onClick={onImageClick} />
+          <ImageCard image={image} onClick={() => onImageClick(image)} />
         </li>
       ))}
     </ul>
@@ -15,11 +15,7 @@ function ImageGallery({ images, onImageClick }) {
 }
 
 ImageGallery.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
   onImageClick: PropTypes.func.isRequired,
 };
 
