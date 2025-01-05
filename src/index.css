@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #000000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,9 +25,11 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  flex-direction: column;
   min-height: 100vh;
+  min-width: 320px;
+  background-color: #000000;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 h1 {
@@ -42,7 +44,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #000000;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -54,15 +56,50 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  padding: 20px;
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+}
+
+main .image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(2, 2, 2, 0.1);
+}
+
+main img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #040404;
     background-color: #ffffff;
   }
   a:hover {
     color: #747bff;
   }
+  input[type="text"] {
+    border-color: rgba(0, 0, 0, 0.5);
+    background-color: #ffffff;
+    color: #050505;
+  }
   button {
     background-color: #f9f9f9;
+    color: #000000;
   }
 }
