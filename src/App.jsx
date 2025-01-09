@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
 import SearchBar from './components/SearchBar/SearchBar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import ImageModal from './components/ImageModal/ImageModal';
@@ -22,8 +23,12 @@ function App() {
       try {
         const data = await fetchImages(query, page);
         setImages((prev) => [...prev, ...data]);
+        if (data.length === 0) {
+          toast.error('No images found. Try a different search query.');
+        }
       } catch (err) {
         setError(err.message);
+        toast.error('Failed to fetch images. Please try again later.');
       } finally {
         setIsLoading(false);
       }
@@ -33,6 +38,11 @@ function App() {
   }, [query, page]);
 
   const handleSearch = (newQuery) => {
+    if (newQuery.trim() === '') {
+      toast.error('Please enter a valid search query.');
+      return;
+    }
+
     if (newQuery === query) return;
     setQuery(newQuery);
     setImages([]);
@@ -52,6 +62,7 @@ function App() {
 
   return (
     <div>
+      <Toaster position="top-right" reverseOrder={false} />
       <SearchBar onSubmit={handleSearch} />
       {error && <p>Error: {error}</p>}
       <ImageGallery images={images} onImageClick={handleImageClick} />
